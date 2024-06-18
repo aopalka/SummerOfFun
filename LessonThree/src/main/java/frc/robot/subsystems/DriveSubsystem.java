@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,7 +10,6 @@ import frc.Lib.MotorControlEnum;
 import frc.Lib.MotorModule;
 import frc.Lib.MotorState;
 import frc.Lib.MotorTypes.MotorTypeEnum;
-import frc.Lib.MotorTypes.CTRE.Falcon500;
 
 public class DriveSubsystem extends SubsystemBase {
   private final MotorModule leftSideMotor;
@@ -81,5 +79,9 @@ public class DriveSubsystem extends SubsystemBase {
   public void stopMotor(){
     leftSideMotor.stopMotor();
     rightSideMotor.stopMotor();
+  }
+
+  public double getDriveVelocity(){
+    return (leftSideMotor.motor.getVelocity()+rightSideMotor.motor.getVelocity())/2;
   }
 }
