@@ -1,7 +1,5 @@
-package frc.robot.subsystems;
+package frc.Lib;
 
-import frc.Lib.MotorControlEnum;
-import frc.Lib.MotorState;
 import frc.Lib.MotorTypes.MotorTypeEnum;
 import frc.Lib.MotorTypes.MotorWrapper;
 import frc.Lib.MotorTypes.CTRE.Falcon500;
@@ -50,7 +48,7 @@ public class MotorModule {
     public void setDesiredState(MotorState currentState, MotorControlEnum controlType) {
         switch (controlType) {
             case PositionVoltage:
-                setAngle(currentState);
+                setPosition(currentState);
                 break;
             case DutyCycleOut:
                 setSpeed(currentState, true);
@@ -62,7 +60,7 @@ public class MotorModule {
     }
 
     /**
-     * sets the drive motor's speed given the desired state's velocity in
+     * sets the  motor's speed given the desired state's velocity in
      * rotations/second
      *
      * @param state
@@ -77,7 +75,7 @@ public class MotorModule {
      *
      * @param state
      */
-    private void setAngle(MotorState state) {
+    private void setPosition(MotorState state) {
         motor.setAngle(state.angle.getRotations());
     }
 
