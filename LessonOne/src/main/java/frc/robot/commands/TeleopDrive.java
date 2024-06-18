@@ -5,19 +5,26 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class TeleopDrive extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem m_subsystem;
+  private DoubleSupplier left;
+  private DoubleSupplier right;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TeleopDrive(DriveSubsystem subsystem) {
+  public TeleopDrive(DriveSubsystem subsystem, DoubleSupplier left, DoubleSupplier right) {
+    right=this.right;
+    left=this.left;
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,7 +36,9 @@ public class TeleopDrive extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_subsystem.Drive(left.getAsDouble(), right.getAsDouble());
+  }
 
   // Called once the command ends or is interrupted.
   @Override

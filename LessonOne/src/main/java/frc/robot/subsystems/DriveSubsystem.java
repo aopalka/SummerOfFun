@@ -4,12 +4,31 @@
 
 package frc.robot.subsystems;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.Lib.MotorModule;
+import frc.Lib.MotorState;
+import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public DriveSubsystem() {}
+
+  MotorModule leftMotor;
+  MotorModule rightmotor;
+
+  public DriveSubsystem() {
+    leftMotor = new MotorModule(0, "rio");
+    rightmotor = new MotorModule(1, "rio");
+  }
+
+
+
+  public void Drive(double left, double right) {
+    leftMotor.setDesiredState(new MotorState(left*Constants.MotorConstants.maxSpeed, null), null);
+    rightmotor.setDesiredState(new MotorState(right*Constants.MotorConstants.maxSpeed, null), null);
+  } 
 
   /**
    * Example command factory method.
