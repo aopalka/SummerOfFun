@@ -6,10 +6,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.Lib.MotorModule;
+import frc.Lib.MotorState;
+import frc.Lib.MotorTypes.MotorTypeEnum;
+import frc.Lib.MotorTypes.CTRE.KrakenX60;
+import frc.robot.Constants;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public DriveTrainSubsystem() {}
+  MotorModule leftMotor;
+  MotorModule rightMotor;
+  public DriveTrainSubsystem() {
+    leftMotor = new MotorModule(MotorTypeEnum.KrakenX60, 0, "rio");
+    rightMotor = new MotorModule(MotorTypeEnum.KrakenX60, 1, "rio");
+
+  }
 
   /**
    * Example command factory method.
@@ -44,4 +55,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
+  public void Drive(double left, double right){
+    leftMotor.setDesiredState(new MotorState(left*Constants.MotorConstants.maxSpeed, null), null);
+    rightMotor.setDesiredState(new MotorState(right*Constants.MotorConstants.maxSpeed, null), null);
+  }
+
 }
